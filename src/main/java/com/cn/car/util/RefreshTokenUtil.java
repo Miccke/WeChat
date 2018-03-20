@@ -15,10 +15,10 @@ import com.cn.car.entity.WeChatUserInfo;
 @Component
 public class RefreshTokenUtil {
 	/**
-     * »ñÈ¡ÍøÒ³ÊÚÈ¨Æ¾Ö¤
+     * è·å–ç½‘é¡µæˆæƒå‡­è¯
      * 
-     * @param appId ¹«ÖÚÕËºÅµÄÎ¨Ò»±êÊ¶
-     * @param appSecret ¹«ÖÚÕËºÅµÄÃÜÔ¿
+     * @param appId å…¬ä¼—è´¦å·çš„å”¯ä¸€æ ‡è¯†
+     * @param appSecret å…¬ä¼—è´¦å·çš„å¯†é’¥
      * @param code
      * @return WeixinAouth2Token
      */
@@ -26,12 +26,12 @@ public class RefreshTokenUtil {
 
     public static RefreshToken getRefreshToken(String appId, String appSecret, String code) {
         RefreshToken wat = null;
-        // Æ´½ÓÇëÇóµØÖ·
+        // æ‹¼æ¥è¯·æ±‚åœ°å€
         String requestUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
         requestUrl = requestUrl.replace("APPID", appId);
         requestUrl = requestUrl.replace("SECRET", appSecret);
         requestUrl = requestUrl.replace("CODE", code);
-        // »ñÈ¡ÍøÒ³ÊÚÈ¨Æ¾Ö¤
+        // è·å–ç½‘é¡µæˆæƒå‡­è¯
         JSONObject jsonObject = HttpsRequestUtil.httpsRequest(requestUrl, "GET", null);
         if (null != jsonObject) {
             try {
@@ -45,51 +45,51 @@ public class RefreshTokenUtil {
                 wat = null;
                 int errorCode = jsonObject.getInt("errcode");
                 String errorMsg = jsonObject.getString("errmsg");
-                log.error("»ñÈ¡ÓÃ»§ĞÅÏ¢Ê§°Ü errcode:{\""+errorCode+"\"} errmsg:{+\""+errorMsg+"\"}");
+                log.error("è·å–ç”¨æˆ·ä¿¡æ¯å¤±è´¥ errcode:{\""+errorCode+"\"} errmsg:{+\""+errorMsg+"\"}");
             }
         }
         return wat;
     }
     /**
-     * Í¨¹ıÍøÒ³ÊÚÈ¨»ñÈ¡ÓÃ»§ĞÅÏ¢
+     * é€šè¿‡ç½‘é¡µæˆæƒè·å–ç”¨æˆ·ä¿¡æ¯
      * 
-     * @param accessToken ÍøÒ³ÊÚÈ¨½Ó¿Úµ÷ÓÃÆ¾Ö¤
-     * @param openId ÓÃ»§±êÊ¶
+     * @param accessToken ç½‘é¡µæˆæƒæ¥å£è°ƒç”¨å‡­è¯
+     * @param openId ç”¨æˆ·æ ‡è¯†
      * @return WeChatUserInfo
      */
     @SuppressWarnings({ "deprecation", "unchecked" })
 	public static WeChatUserInfo getWeChatUserInfo(String accessToken, String openId) {
         WeChatUserInfo weChatUserInfo = null;
-        // Æ´½ÓÇëÇóµØÖ·
+        // æ‹¼æ¥è¯·æ±‚åœ°å€
         String requestUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID";
         requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
-        // Í¨¹ıÍøÒ³ÊÚÈ¨»ñÈ¡ÓÃ»§ĞÅÏ¢
+        // é€šè¿‡ç½‘é¡µæˆæƒè·å–ç”¨æˆ·ä¿¡æ¯
         JSONObject jsonObject = HttpsRequestUtil.httpsRequest(requestUrl, "GET", null);
 
         if (null != jsonObject) {
             try {
             	weChatUserInfo = new WeChatUserInfo();
-                // ÓÃ»§µÄ±êÊ¶
+                // ç”¨æˆ·çš„æ ‡è¯†
             	weChatUserInfo.setOpenId(jsonObject.getString("openid"));
-                // êÇ³Æ
+                // æ˜µç§°
             	weChatUserInfo.setNickname(jsonObject.getString("nickname"));
-                // ĞÔ±ğ£¨1ÊÇÄĞĞÔ£¬2ÊÇÅ®ĞÔ£¬0ÊÇÎ´Öª£©
+                // æ€§åˆ«ï¼ˆ1æ˜¯ç”·æ€§ï¼Œ2æ˜¯å¥³æ€§ï¼Œ0æ˜¯æœªçŸ¥ï¼‰
             	weChatUserInfo.setSex(jsonObject.getInt("sex"));
-                // ÓÃ»§ËùÔÚ¹ú¼Ò
+                // ç”¨æˆ·æ‰€åœ¨å›½å®¶
             	weChatUserInfo.setCountry(jsonObject.getString("country"));
-                // ÓÃ»§ËùÔÚÊ¡·İ
+                // ç”¨æˆ·æ‰€åœ¨çœä»½
             	weChatUserInfo.setProvince(jsonObject.getString("province"));
-                // ÓÃ»§ËùÔÚ³ÇÊĞ
+                // ç”¨æˆ·æ‰€åœ¨åŸå¸‚
             	weChatUserInfo.setCity(jsonObject.getString("city"));
-                // ÓÃ»§Í·Ïñ
+                // ç”¨æˆ·å¤´åƒ
             	weChatUserInfo.setHeadImgUrl(jsonObject.getString("headimgurl"));
-                // ÓÃ»§ÌØÈ¨ĞÅÏ¢
+                // ç”¨æˆ·ç‰¹æƒä¿¡æ¯
             	weChatUserInfo.setPrivilegeList(JSONArray.toList(jsonObject.getJSONArray("privilege"), List.class));
             } catch (Exception e) {
             	weChatUserInfo = null;
                 int errorCode = jsonObject.getInt("errcode");
                 String errorMsg = jsonObject.getString("errmsg");
-                log.error("»ñÈ¡ÓÃ»§ĞÅÏ¢Ê§°Ü errcode:{\""+errorCode+"\"} errmsg:{+\""+errorMsg+"\"}");
+                log.error("è·å–ç”¨æˆ·ä¿¡æ¯å¤±è´¥ errcode:{\""+errorCode+"\"} errmsg:{+\""+errorMsg+"\"}");
             }
         }
         return weChatUserInfo;

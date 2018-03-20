@@ -7,25 +7,25 @@ import java.util.Set;
 /**
  * Created with IDEA
  * Created by ${jie.chen} on 2016/7/14.
- * ºóÌ¨µÇÂ¼Service
+ * åå°ç™»å½•Service
  */
 public interface SysUserService {
     /**
-     * ShiroµÄµÇÂ¼ÑéÖ¤£¬Í¨¹ıÓÃ»§Ãû²éÑ¯ÓÃ»§ĞÅÏ¢
+     * Shiroçš„ç™»å½•éªŒè¯ï¼Œé€šè¿‡ç”¨æˆ·åæŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
      * @param username
      * @return
      */
     public SysUser findUserByUsername(String username) ;
 
     /**
-     * ¸ù¾İÕËºÅ²éÕÒ½ÇÉ«Ãû³Æ
+     * æ ¹æ®è´¦å·æŸ¥æ‰¾è§’è‰²åç§°
      * @param username
      * @return
      */
     public Set<String> findRoles(String username) ;
 
     /**
-     * ¸ù¾İÕËºÅ²éÕÒÈ¨ÏŞ
+     * æ ¹æ®è´¦å·æŸ¥æ‰¾æƒé™
      * @param username
      * @return
      */

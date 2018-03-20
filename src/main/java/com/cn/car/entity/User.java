@@ -7,12 +7,12 @@ public class User {
     private Integer id;
 
     /**
-     * ÐÕÃû
+     * å§“å
      */
     private String username;
 
     /**
-     * ÃÜÂë
+     * å¯†ç 
      */
     private String password;
 
@@ -38,32 +38,32 @@ public class User {
     }
 
     /**
-     * ÐÕÃû
-     * @return username ÐÕÃû
+     * å§“å
+     * @return username å§“å
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * ÐÕÃû
-     * @param username ÐÕÃû
+     * å§“å
+     * @param username å§“å
      */
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
     }
 
     /**
-     * ÃÜÂë
-     * @return password ÃÜÂë
+     * å¯†ç 
+     * @return password å¯†ç 
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * ÃÜÂë
-     * @param password ÃÜÂë
+     * å¯†ç 
+     * @param password å¯†ç 
      */
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();

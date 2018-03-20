@@ -51,28 +51,28 @@ public class WeChatUserInfoController {
 			HttpServletResponse response,HttpSession session) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		// 用户同意授权后，能获取到code
+		// 鐢ㄦ埛鍚屾剰鎺堟潈鍚庯紝鑳借幏鍙栧埌code
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
 
-		// 用户同意授权
+		// 鐢ㄦ埛鍚屾剰鎺堟潈
 		if (!"authdeny".equals(code)) {
-			// 获取网页授权access_token
+			// 鑾峰彇缃戦〉鎺堟潈access_token
 			RefreshToken refreshToken = RefreshTokenUtil.getRefreshToken(prop.getProperty("AppID"), prop.getProperty("AppSecret"),code);
-			// 网页授权接口访问凭证
+			// 缃戦〉鎺堟潈鎺ュ彛璁块棶鍑瘉
 			String accessToken = refreshToken.getAccessToken();
-			// 用户标识
+			// 鐢ㄦ埛鏍囪瘑
 			String openId = refreshToken.getOpenId();
-			// 获取用户信息
+			// 鑾峰彇鐢ㄦ埛淇℃伅
 			WeChatUserInfo weChatUserInfo = RefreshTokenUtil.getWeChatUserInfo(
 					accessToken, openId);
 
-			// 设置要传递的参数
+			// 璁剧疆瑕佷紶閫掔殑鍙傛暟
 			request.setAttribute("weChatUserInfo", weChatUserInfo);
 			request.setAttribute("state", state);
 			session.setAttribute("weChatUserInfo", weChatUserInfo);
 		}
-		// 跳转到personal.jsp
+		// 璺宠浆鍒皃ersonal.jsp
 		request.getRequestDispatcher("../WeChat/personal.jsp").forward(request, response);
 
 	}

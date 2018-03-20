@@ -4,26 +4,26 @@ package com.cn.car.entity;
 import java.util.List;
 
 /**
- *  Í¨¹ıÍøÒ³ÊÚÈ¨»ñÈ¡µÄÓÃ»§ĞÅÏ¢ 
+ *  é€šè¿‡ç½‘é¡µæˆæƒè·å–çš„ç”¨æˆ·ä¿¡æ¯ 
  * @author cw5128
  *
  */
 public class WeChatUserInfo {
-    // ÓÃ»§±êÊ¶
+    // ç”¨æˆ·æ ‡è¯†
     private String openId;
-    // ÓÃ»§êÇ³Æ
+    // ç”¨æˆ·æ˜µç§°
     private String nickname;
-    // ĞÔ±ğ£¨1ÊÇÄĞĞÔ£¬2ÊÇÅ®ĞÔ£¬0ÊÇÎ´Öª£©
+    // æ€§åˆ«ï¼ˆ1æ˜¯ç”·æ€§ï¼Œ2æ˜¯å¥³æ€§ï¼Œ0æ˜¯æœªçŸ¥ï¼‰
     private int sex;
-    // ¹ú¼Ò
+    // å›½å®¶
     private String country;
-    // Ê¡·İ
+    // çœä»½
     private String province;
-    // ³ÇÊĞ
+    // åŸå¸‚
     private String city;
-    // ÓÃ»§Í·ÏñÁ´½Ó
+    // ç”¨æˆ·å¤´åƒé“¾æ¥
     private String headImgUrl;
-    // ÓÃ»§ÌØÈ¨ĞÅÏ¢
+    // ç”¨æˆ·ç‰¹æƒä¿¡æ¯
     private List<String> privilegeList;
 
     public String getOpenId() {

@@ -11,7 +11,7 @@ public class Decript {
 			MessageDigest digest = MessageDigest.getInstance("SHA-1");
 			digest.update(decript.getBytes());
 			byte messageDigest[] = digest.digest(); // Create Hex String
-			StringBuffer hexString = new StringBuffer(); // ×Ö½ÚÊı×é×ª»»Îª Ê®Áù½øÖÆ Êı
+			StringBuffer hexString = new StringBuffer(); // å­—èŠ‚æ•°ç»„è½¬æ¢ä¸º åå…­è¿›åˆ¶ æ•°
 			for (int i = 0; i < messageDigest.length; i++) {
 				String shaHex = Integer.toHexString(messageDigest[i] & 0xFF);
 				if (shaHex.length() < 2) {

@@ -1,7 +1,7 @@
 package com.cn.car.entity;
 
 /**
- * ½ÓÊÕµ½µÄÎ¢ĞÅxmlÊµÌåÀà  
+ * æ¥æ”¶åˆ°çš„å¾®ä¿¡xmlå®ä½“ç±»  
  * @author cw5128
  *
  */

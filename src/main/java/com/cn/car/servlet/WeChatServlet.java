@@ -24,7 +24,7 @@ public class WeChatServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("¿ªÊ¼Ç©ÃûĞ£Ñé");
+		System.out.println("å¼€å§‹ç­¾åæ ¡éªŒ");
 		String signature = request.getParameter("signature");
 		String timestamp = request.getParameter("timestamp");
 		String nonce = request.getParameter("nonce");
@@ -33,22 +33,22 @@ public class WeChatServlet extends HttpServlet {
 		array.add(signature);
 		array.add(timestamp);
 		array.add(nonce);
-		// ÅÅĞò
+		// æ’åº
 		String sortString = sort(token, timestamp, nonce);
-		// ¼ÓÃÜ
+		// åŠ å¯†
 		String mytoken = Decript.SHA1(sortString);
-		// Ğ£ÑéÇ©Ãû
+		// æ ¡éªŒç­¾å
 		if (mytoken != null && mytoken != "" && mytoken.equals(signature)) {
-			System.out.println("Ç©ÃûĞ£ÑéÍ¨¹ı¡£");
-			response.getWriter().println(echostr); // Èç¹û¼ìÑé³É¹¦Êä³öechostr£¬Î¢ĞÅ·şÎñÆ÷½ÓÊÕµ½´ËÊä³ö£¬²Å»áÈ·ÈÏ¼ìÑéÍê³É¡£
+			System.out.println("ç­¾åæ ¡éªŒé€šè¿‡ã€‚");
+			response.getWriter().println(echostr); // å¦‚æœæ£€éªŒæˆåŠŸè¾“å‡ºechostrï¼Œå¾®ä¿¡æœåŠ¡å™¨æ¥æ”¶åˆ°æ­¤è¾“å‡ºï¼Œæ‰ä¼šç¡®è®¤æ£€éªŒå®Œæˆã€‚
 		} else {
 			
-			System.out.println("Ç©ÃûĞ£ÑéÊ§°Ü¡£");
+			System.out.println("ç­¾åæ ¡éªŒå¤±è´¥ã€‚");
 		}
 	}
 
 	/**
-	 * * ÅÅĞò·½·¨ * @param token * @param timestamp * @param nonce * @return
+	 * * æ’åºæ–¹æ³• * @param token * @param timestamp * @param nonce * @return
 	 */
 	public static String sort(String token, String timestamp, String nonce) {
 		String[] strArray = { token, timestamp, nonce };

@@ -56,9 +56,9 @@ public class UserController {
             subject.login(token);
             return "index" ;
         }catch (Exception e){
-            //这里将异常打印关闭是因为如果登录失败的话会自动抛异常
+            //杩欓噷灏嗗紓甯告墦鍗板叧闂槸鍥犱负濡傛灉鐧诲綍澶辫触鐨勮瘽浼氳嚜鍔ㄦ姏寮傚父
 //            e.printStackTrace();
-            model.addAttribute("error","用户名或密码错误") ;
+            model.addAttribute("error","鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒") ;
             return "../../login" ;
         }
     }

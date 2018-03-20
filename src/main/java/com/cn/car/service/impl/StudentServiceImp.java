@@ -16,7 +16,7 @@ public class StudentServiceImp implements StudentService {
 	private StudentDao studentDao;
 
 	public Map<String,Object> selectByFy(Map<String, Object> param) {
-		//bootstrap-table要求服务器返回的json须包含：totlal，rows
+		//bootstrap-table瑕佹眰鏈嶅姟鍣ㄨ繑鍥炵殑json椤诲寘鍚細totlal锛宺ows
 		Map<String,Object> result = new HashMap<String,Object>();
 		int total=studentDao.selectByFy(null).size();
 		List<Student> rows=studentDao.selectByFy(param);

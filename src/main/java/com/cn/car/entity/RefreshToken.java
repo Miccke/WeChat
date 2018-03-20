@@ -1,19 +1,19 @@
 package com.cn.car.entity;
 /**
- *  ÍøÒ³ÊÚÈ¨ĞÅÏ¢
+ *  ç½‘é¡µæˆæƒä¿¡æ¯
  * @author cw5128
  *
  */
 public class RefreshToken {
-	// ÍøÒ³ÊÚÈ¨½Ó¿Úµ÷ÓÃÆ¾Ö¤
+	// ç½‘é¡µæˆæƒæ¥å£è°ƒç”¨å‡­è¯
     private String accessToken;
-    // Æ¾Ö¤ÓĞĞ§Ê±³¤
+    // å‡­è¯æœ‰æ•ˆæ—¶é•¿
     private int expiresIn;
-    // ÓÃÓÚË¢ĞÂÆ¾Ö¤
+    // ç”¨äºåˆ·æ–°å‡­è¯
     private String refreshToken;
-    // ÓÃ»§±êÊ¶
+    // ç”¨æˆ·æ ‡è¯†
     private String openId;
-    // ÓÃ»§ÊÚÈ¨×÷ÓÃÓò
+    // ç”¨æˆ·æˆæƒä½œç”¨åŸŸ
     private String scope;
 
     public String getAccessToken() {

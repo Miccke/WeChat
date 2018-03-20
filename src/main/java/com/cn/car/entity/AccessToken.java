@@ -2,14 +2,14 @@ package com.cn.car.entity;
 
 
 /**
- * 凭证
+ * 鍑瘉
  * @author cw5128
  *
  */
 public class AccessToken {
-	 // 接口访问凭证
+	 // 鎺ュ彛璁块棶鍑瘉
     private String accessToken;
-    // 凭证有效期，单位：秒
+    // 鍑瘉鏈夋晥鏈燂紝鍗曚綅锛氱
     private int expiresIn;
 
     public String getAccessToken() {

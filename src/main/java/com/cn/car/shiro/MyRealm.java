@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * Created with IDEA
  * Created by ${jie.chen} on 2016/7/14.
- * Shiro×Ô¶¨ÒåÓò
+ * Shiroè‡ªå®šä¹‰åŸŸ
  */
 public class MyRealm extends AuthorizingRealm {
 
@@ -27,7 +27,7 @@ public class MyRealm extends AuthorizingRealm {
     private SysUserService sysUserService;
 
     /**
-     * ÓÃÓÚµÄÈ¨ÏŞµÄÈÏÖ¤¡£
+     * ç”¨äºçš„æƒé™çš„è®¤è¯ã€‚
      * @param principalCollection
      * @return
      */
@@ -43,7 +43,7 @@ public class MyRealm extends AuthorizingRealm {
     }
 
     /**
-     * Ê×ÏÈÖ´ĞĞÕâ¸öµÇÂ¼ÑéÖ¤
+     * é¦–å…ˆæ‰§è¡Œè¿™ä¸ªç™»å½•éªŒè¯
      * @param token
      * @return
      * @throws AuthenticationException
@@ -51,11 +51,11 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
             throws AuthenticationException {
-        //»ñÈ¡ÓÃ»§ÕËºÅ
+        //è·å–ç”¨æˆ·è´¦å·
         String username = token.getPrincipal().toString() ;
         SysUser user = sysUserService.findUserByUsername(username) ;
         if (user != null){
-            //½«²éÑ¯µ½µÄÓÃ»§ÕËºÅºÍÃÜÂë´æ·Åµ½ authenticationInfoÓÃÓÚºóÃæµÄÈ¨ÏŞÅĞ¶Ï¡£µÚÈı¸ö²ÎÊı´«ÈërealName¡£
+            //å°†æŸ¥è¯¢åˆ°çš„ç”¨æˆ·è´¦å·å’Œå¯†ç å­˜æ”¾åˆ° authenticationInfoç”¨äºåé¢çš„æƒé™åˆ¤æ–­ã€‚ç¬¬ä¸‰ä¸ªå‚æ•°ä¼ å…¥realNameã€‚
             AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getPassword(),
                     "a") ;
             return authenticationInfo ;

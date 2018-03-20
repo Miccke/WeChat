@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UrlEncodeUTF8 {
 	/**
-	 * URL±àÂë£¨utf-8£©
+	 * URLç¼–ç ï¼ˆutf-8ï¼‰
 	 * @param source
 	 * @return
 	 */
