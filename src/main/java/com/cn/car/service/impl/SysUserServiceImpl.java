@@ -8,28 +8,21 @@ import com.cn.car.service.SysUserService;
 
 import javax.annotation.Resource;
 
+import java.util.List;
 import java.util.Set;
 
-/**
- * Created with IDEA
- * Created by ${jie.chen} on 2016/7/14.
- */
 @Service("sysUserService")
 public class SysUserServiceImpl implements SysUserService {
 
-    @Resource
-    private SysUserDao sysUserDao ;
+	@Resource
+	private SysUserDao sysUserDao;
+	@Override
+	public List<SysUser> userlist(SysUser user) {
+		return sysUserDao.userlist(user);
+	}
+	@Override
+	public int userlistcount(SysUser user) {
+		return sysUserDao.userlistcount(user);
+	}
 
-    public SysUser findUserByUsername(String username) {
-        SysUser SysUser = sysUserDao.findUserByUsername(username);
-        return SysUser;
-    }
-
-    public Set<String> findRoles(String username) {
-        return sysUserDao.findRoles(username);
-    }
-
-    public Set<String> findPermissions(String username) {
-        return sysUserDao.findPermissions(username);
-    }
 }

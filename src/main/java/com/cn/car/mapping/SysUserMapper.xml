@@ -4,44 +4,56 @@
   <resultMap id="BaseResultMap" type="com.cn.car.entity.SysUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="realName" property="realName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="college" property="college" jdbcType="VARCHAR" />
     <result column="roleId" property="roleId" jdbcType="INTEGER" />
+    <result column="openId" property="openId" jdbcType="VARCHAR" />
+    <result column="professional" property="professional" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, userName, password, roleId
+    id, userName, realName, password, sex, age, grade, phone, college, roleId, openId, professional
   </sql>
- 	<select id="findUserByUsername" parameterType="String" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
-        from t_user where userName=#{userName,jdbcType=VARCHAR}
-    </select>
 
-    <select id="findRoles" parameterType="String" resultType="String">
-        select r.roleName from t_user u,t_role r where u.roleId=r.id and u.userName=#{userName,jdbcType=VARCHAR}
-    </select>
+	<select id="userlist" resultMap="BaseResultMap" parameterType="com.cn.car.entity.SysUser">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		<if test="realName != null">
+			where realName = #{realName,jdbcType=VARCHAR}
+		</if>
+			order by #{sortField,jdbcType=VARCHAR} #{sortOrder,jdbcType=VARCHAR}
+		<if test="pageSize != null">
+			limit #{startIndex},#{pageSize}
+		</if>
+	</select>
 
-    <select id="findPermissions" parameterType="String" resultType="String">
-        select p.permissionName from t_user u,t_role r,t_permission p
-        where u.roleId=r.id and p.roleId=r.id and u.userName=#{userName,jdbcType=VARCHAR}
-    </select>
-
+	<select id="userlistcount" resultType="java.lang.Integer"
+		parameterType="com.cn.car.entity.SysUser">
+		select count(1) from t_user
+		<if test="realName != null">
+			where realName = #{realName,jdbcType=VARCHAR}
+		</if>
+	</select> 
   
   
-  
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_user
-    where id = #{id,jdbcType=INTEGER}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.cn.car.entity.SysUser" >
-    insert into t_user (id, userName, password, 
-      roleId)
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{roleId,jdbcType=INTEGER})
+    insert into t_user (id, userName, realName, 
+      password, sex, age, 
+      grade, phone, college, 
+      roleId, openId)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{grade,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cn.car.entity.SysUser" >
     insert into t_user
@@ -52,11 +64,32 @@
       <if test="userName != null" >
         userName,
       </if>
+      <if test="realName != null" >
+        realName,
+      </if>
       <if test="password != null" >
         password,
       </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="college != null" >
+        college,
+      </if>
       <if test="roleId != null" >
         roleId,
+      </if>
+      <if test="openId != null" >
+        openId,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -66,11 +99,32 @@
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        #{college,jdbcType=VARCHAR},
+      </if>
       <if test="roleId != null" >
         #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -80,11 +134,32 @@
       <if test="userName != null" >
         userName = #{userName,jdbcType=VARCHAR},
       </if>
+      <if test="realName != null" >
+        realName = #{realName,jdbcType=VARCHAR},
+      </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        college = #{college,jdbcType=VARCHAR},
+      </if>
       <if test="roleId != null" >
         roleId = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null" >
+        openId = #{openId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -92,8 +167,15 @@
   <update id="updateByPrimaryKey" parameterType="com.cn.car.entity.SysUser" >
     update t_user
     set userName = #{userName,jdbcType=VARCHAR},
+      realName = #{realName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      roleId = #{roleId,jdbcType=INTEGER}
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      college = #{college,jdbcType=VARCHAR},
+      roleId = #{roleId,jdbcType=INTEGER},
+      openId = #{openId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
