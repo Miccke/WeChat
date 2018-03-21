@@ -1,0 +1,12 @@
+﻿[
+	
+	{"m_id":1,"id":"user","menu":"用户管理","iconCls":"icon-add","url":""},
+	{"m_id":2,"id":"addUser","pid":"user","menu":"增加用户","iconCls":"icon-add","url":"../datagrid/celledit.html"},
+	{"m_id":3,"id":"editUser","pid":"user","menu":"修改用户","iconCls":"icon-edit","url":"../datagrid/rowedit.html"},
+	{"m_id":4,"id":"removeUser","pid":"user","menu":"删除用户","iconCls":"icon-remove","url":"../datagrid/datagrid.html"},
+	
+	{"m_id":5,"id":"right","menu":"权限管理","iconCls":"","url":""},
+	{"m_id":6,"id":"addRight","pid":"right","menu":"查询权限","iconCls":"Note","url":"../tree/detailgrid.html"},
+	{"m_id":7,"id":"editRight","pid":"right","menu":"操作权限","iconCls":"Reports","url":"../buttonedit/selectGrid.html"}	
+
+]
