@@ -19,16 +19,16 @@
     id, userName, realName, password, sex, age, grade, phone, college, roleId, openId, professional
   </sql>
 
-	<select id="userlist" resultMap="BaseResultMap" parameterType="com.cn.car.entity.SysUser">
+	<select id="userlist" resultMap="BaseResultMap" statementType="STATEMENT" parameterType="com.cn.car.entity.SysUser">
 		select
 		<include refid="Base_Column_List" />
-		from t_user
+			from t_user
 		<if test="realName != null">
-			where realName = #{realName,jdbcType=VARCHAR}
+			where realName = '${realName,jdbcType=VARCHAR}'
 		</if>
-			order by #{sortField,jdbcType=VARCHAR} #{sortOrder,jdbcType=VARCHAR}
+			order by ${sortField} desc
 		<if test="pageSize != null">
-			limit #{startIndex},#{pageSize}
+			limit ${startIndex},${pageSize}
 		</if>
 	</select>
 

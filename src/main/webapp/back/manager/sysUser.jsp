@@ -5,12 +5,12 @@
 <head>
 <base href="${pageContext.request.contextPath }/">
 <meta charset="utf-8">
-<title>主界面</title>
+<title>用户管理</title>
 <link href="back/css/demo.css" rel="stylesheet" type="text/css" />
 <script src="back/js/boot.js" type="text/javascript"></script>
 </head>
 <body>
-	<h1>DataGrid 数据表格</h1>
+	<h1>用户管理</h1>
 
 	<div style="width: 800px;">
 		<div class="mini-toolbar" style="border-bottom: 0; padding: 0px;">
