@@ -40,6 +40,7 @@ public class CourseController {
         course.setPageSize(pageSize);
         
         //字段排序
+        
         String sortField = request.getParameter("sortField");
         String sortOrder = request.getParameter("sortOrder");
         

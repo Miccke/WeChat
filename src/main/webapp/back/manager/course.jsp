@@ -36,8 +36,8 @@
 			<div type="checkcolumn"></div>
 			<div field="course" width="120" headerAlign="center" allowSort="true">课程</div>
 			<div field="startTime" width="120" headerAlign="center" allowSort="true" dateFormat="yyyy-MM-dd HH:mm:ss">开始时间</div>
-			<div field="endTime" width="120" dateFormat="yyyy-MM-dd HH:mm:ss">结束时间</div>
-			<div field="teacher" width="100" >教师</div>
+			<div field="endTime" width="120" dateFormat="yyyy-MM-dd HH:mm:ss" allowSort="true">结束时间</div>
+			<div field="teacher" width="100" allowSort="true">教师</div>
 		</div>
 	</div>
 <!--  dateFormat="yyyy-MM-dd HH:mm:ss" renderer="onDayRenderer" --> <!-- dateFormat="yyyy-MM-dd HH:mm:ss" -->

@@ -35,16 +35,14 @@
 		<div property="columns">
 			<!--<div type="indexcolumn"></div>        -->
 			<div type="checkcolumn"></div>
-			<div field="userName" width="120" headerAlign="center"
-				allowSort="true">帐号</div>
+			<div field="userName" width="120" headerAlign="center" allowSort="true">帐号</div>
 			<div field="realName" width="120" headerAlign="center" allowSort="true">姓名</div>
-
-			<div field="password" width="120">密码</div>
-			<div field="sex" width="100">性别</div>
-			<div field="age" width="100">年龄</div>
-			<div field="grade" width="100">年级</div>
-			<div field="college" width="100">学院</div>
-			<div field="professional" width="100">专业</div>
+			<div field="password" width="120" headerAlign="center" allowSort="true">密码</div>
+			<div field="sex" width="100" headerAlign="center" allowSort="true">性别</div>
+			<div field="age" width="100" headerAlign="center" allowSort="true">年龄</div>
+			<div field="grade" width="100" headerAlign="center" allowSort="true">年级</div>
+			<div field="college" width="100" headerAlign="center" allowSort="true">学院</div>
+			<div field="professional" width="100" headerAlign="center" allowSort="true">专业</div>
 		</div>
 	</div>
 
