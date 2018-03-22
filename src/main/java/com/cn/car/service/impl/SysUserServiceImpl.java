@@ -24,5 +24,24 @@ public class SysUserServiceImpl implements SysUserService {
 	public int userlistcount(SysUser user) {
 		return sysUserDao.userlistcount(user);
 	}
-
+	
+	/**
+     * 微信查询用户是否绑定姓名
+     * @param openId
+     * @return
+     */
+	@Override
+	public SysUser checkUser(String openId) {
+		// TODO Auto-generated method stub
+		return sysUserDao.checkUser(openId);
+	}
+	 /**
+     * 绑定微信和账号
+     * @param user
+     * @return
+     */
+	@Override
+    public int blindUser(SysUser user) {
+		return sysUserDao.blindUser(user);
+	}
 }

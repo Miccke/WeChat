@@ -29,9 +29,7 @@
 </head>
 
 <body style="background-color:#f3f3f3">
-<% 
-       
-    %> 
+
 <!--头部-->
 <div class="header_gls" style="background:#FF7F00"> 
 <div style="height:2.7em;"></div>

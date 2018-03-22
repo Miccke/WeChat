@@ -1,3 +1,12 @@
+<%@page import="com.cn.car.entity.WeChatUserInfo"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	 // 获取由OAuthServlet中传入的参数
+ //   WeChatUserInfo user = (WeChatUserInfo)request.getAttribute("weChatUserInfo"); 
+  //  String openId = user.getOpenId();
+    String openId = "bbb123456";
+%>
 <!doctype html>
 <html>
 <head>
@@ -5,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
 
 <title>学生打卡</title>
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../WeChat/js/jquery-1.11.1.min.js"></script>
 <style type="text/css">
 		body{
 			background: #F3F3F3
@@ -51,25 +60,34 @@
 		</div>
 	</div>	
 	<div style="color: #FF7F00; font-size: 12px;border:1px dashed  #FF7F00;text-align: center; height: 50px;line-height: 50px;border-radius: 25px;background: #fff;margin-top: 50px; overflow:hidden;"	>
-		湖南工学院信息楼大学物理教室<img src="../images/reload.png" style="width: 20px;height: 20px;margin-left: 40px;vertical-align:middle;"/>
+		湖南工学院信息楼大学物理教室<img src="images/reload.png" style="width: 20px;height: 20px;margin-left: 40px;vertical-align:middle;"/>
 	</div>
 </body>
 </html>
 <script type="text/javascript">
 	function binding() {
-		var studentID = prompt("请输入您的名字进行验证：", "");
-		$.post("../user/checkUser",{openid:studentID},function(data){
+		
+		$.post("../user/checkUser",{openId:'<%=openId%>'},function(data){
 			if(data){
-				alert(data);
-				
+				alert(1);
 			}else{
-				alert(data+"123456");
+				var userName = prompt("请输入您的学号进行绑定：", "");
+				$.post("../user/checkUser",{openId:'<%=openId%>',userName:userName},function(data){
+					if(data){
+						alert(data);				
+					}else{
+						alert(data+"123456");
+					}
+				},"json")
+				
+				if (studentID == "lewanzi")
+					alert("你的输入正确！");
+				else
+					alert("你的输入不正确！");
 			}
+			
 		},"json")
 		
-		if (studentID == "lewanzi")
-			alert("你的输入正确！");
-		else
-			alert("你的输入不正确！");
+		
 	}
 </script>

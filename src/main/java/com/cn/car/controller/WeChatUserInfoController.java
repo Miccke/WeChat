@@ -34,16 +34,21 @@ public class WeChatUserInfoController {
 		}
 	}
 	public static final String redirect_uri = "http://www.miccke.top/weChatUser/";
-	public static final String userURL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+prop.getProperty("AppID")+"&redirect_uri="+UrlEncodeUTF8.urlEncodeUTF8(redirect_uri)+"&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
 	public Logger log = Logger.getLogger(this.getClass());
 	
 	@RequestMapping("/clock")
 	public void redirectPage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		System.out.println(userURL);
-		log.info(userURL);
+		String userURL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+prop.getProperty("AppID")+"&redirect_uri="+UrlEncodeUTF8.urlEncodeUTF8(redirect_uri+"?method=clock")+"&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
 		response.sendRedirect(userURL);
 	}
 	
+	@RequestMapping("/index")
+	@ResponseBody
+	public void getIndex(HttpServletRequest request,
+			HttpServletResponse response,HttpSession session) throws ServletException, IOException {
+		String userURL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+prop.getProperty("AppID")+"&redirect_uri="+UrlEncodeUTF8.urlEncodeUTF8(redirect_uri+"?method=index")+"&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
+		response.sendRedirect(userURL);
+	}
 	
 	@RequestMapping("/")
 	@ResponseBody
@@ -54,7 +59,13 @@ public class WeChatUserInfoController {
 		// 用户同意授权后，能获取到code
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
-
+		String method = request.getParameter("method");
+		String page = "";
+		if(method.equals("clock")){
+			page = "personal.jsp";
+		}else if(method.equals("index")){
+			page = "index.jsp";
+		}
 		// 用户同意授权
 		if (!"authdeny".equals(code)) {
 			// 获取网页授权access_token
@@ -72,10 +83,9 @@ public class WeChatUserInfoController {
 			request.setAttribute("state", state);
 			session.setAttribute("weChatUserInfo", weChatUserInfo);
 		}
-		// 跳转到personal.jsp
-		request.getRequestDispatcher("../WeChat/personal.jsp").forward(request, response);
 
+		// 跳转到page
+		request.getRequestDispatcher("../WeChat/"+page).forward(request, response);
 	}
-	
 	
 }

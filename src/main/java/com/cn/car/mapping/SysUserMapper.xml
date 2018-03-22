@@ -34,15 +34,24 @@
 		</if>
 	</select>
 
-	<select id="userlistcount" resultType="java.lang.Integer"
-		parameterType="com.cn.car.entity.SysUser">
+	<select id="userlistcount" resultType="java.lang.Integer" parameterType="com.cn.car.entity.SysUser">
 		select count(1) from t_user
 		<if test="realName != null">
 			where realName = #{realName,jdbcType=VARCHAR}
 		</if>
 	</select> 
   
-  
+  	<select id="checkUser" resultType="com.cn.car.entity.SysUser" parameterType="java.lang.String">
+  	    select  * from t_user where openId = #{openId,jdbcType=VARCHAR}
+  	</select>
+	<update id="blindUser" resultType="java.lang.Integer" parameterType="com.cn.car.entity.SysUser">
+	    update t_user
+		    set openId = #{openId,jdbcType=VARCHAR}
+		where userName = #{userName,jdbcType=VARCHAR}
+	</update>
+	
+	
+	
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}

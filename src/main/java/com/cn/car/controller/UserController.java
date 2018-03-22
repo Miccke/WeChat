@@ -93,4 +93,31 @@ public class UserController {
 
     }
 
+    @RequestMapping(value = "/checkUser")
+    public void checkUser(HttpServletRequest request, HttpServletResponse response,String openId) throws Exception{ 	
+    	openId = request.getParameter("openId");
+    	SysUser user  = sysUserService.checkUser(openId);
+    	Gson gson = new Gson();
+    	PrintWriter pw = response.getWriter();
+		pw.write(gson.toJson(user)); 
+		pw.flush();
+		pw.close();
+    }  
+    @RequestMapping(value = "/blindUser")
+    public void blindUser(HttpServletRequest request, HttpServletResponse response,SysUser user) throws Exception{ 	
+    	try {
+			sysUserService.blindUser(user);
+			PrintWriter pw = response.getWriter();
+			pw.write("true"); 
+			pw.flush();
+			pw.close();
+		} catch (Exception e) {
+			PrintWriter pw = response.getWriter();
+			pw.write("false"); 
+			pw.flush();
+			pw.close();
+			e.printStackTrace();
+		}
+    	
+    }  
 }

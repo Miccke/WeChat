@@ -9,7 +9,6 @@
 
 	 // 获取由OAuthServlet中传入的参数
     WeChatUserInfo user = (WeChatUserInfo)request.getAttribute("weChatUserInfo"); 
-   // String state=request.getAttribute("state").toString();
     if(null != user) {
 %>
     
