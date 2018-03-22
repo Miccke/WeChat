@@ -5,7 +5,7 @@
 	 // 获取由OAuthServlet中传入的参数
  //   WeChatUserInfo user = (WeChatUserInfo)request.getAttribute("weChatUserInfo"); 
   //  String openId = user.getOpenId();
-    String openId = "bbb123456";
+    String openId = "Miccke123456";
 %>
 <!doctype html>
 <html>
@@ -14,6 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
 
 <title>学生打卡</title>
+<script type="text/javascript" src="../WeChat/js/jweixin-1.2.0.js"></script>
 <script type="text/javascript" src="../WeChat/js/jquery-1.11.1.min.js"></script>
 <style type="text/css">
 		body{
@@ -38,7 +39,7 @@
 		 }
 	</style>	
 </head>
-	
+
 <body>
 	<div class="top">	
 		<ul >
@@ -60,7 +61,7 @@
 		</div>
 	</div>	
 	<div style="color: #FF7F00; font-size: 12px;border:1px dashed  #FF7F00;text-align: center; height: 50px;line-height: 50px;border-radius: 25px;background: #fff;margin-top: 50px; overflow:hidden;"	>
-		湖南工学院信息楼大学物理教室<img src="images/reload.png" style="width: 20px;height: 20px;margin-left: 40px;vertical-align:middle;"/>
+		湖南工学院信息楼大学物理教室<img src="../WeChat/images/reload.png" style="width: 20px;height: 20px;margin-left: 40px;vertical-align:middle;" onClick = "localtion()"/>
 	</div>
 </body>
 </html>
@@ -72,7 +73,7 @@
 				alert(1);
 			}else{
 				var userName = prompt("请输入您的学号进行绑定：", "");
-				$.post("../user/checkUser",{openId:'<%=openId%>',userName:userName},function(data){
+				$.post("../user/blindUser",{openId:'<%=openId%>',userName:userName},function(data){
 					if(data){
 						alert("绑定成功");				
 					}else{
@@ -81,7 +82,54 @@
 				},"json")
 			}
 		},"json")
-		
-		
 	}
+</script>
+<script type="text/javascript">
+	function localtion() {
+		function temp() {
+			var value = '';
+			$.ajax({
+				url : "../weChatUser/signature",
+				async : false,
+				dataType : 'json',
+				success : function(data) {
+					value = data;
+				}
+			});
+			return value;
+		};
+		var obj = temp();
+
+		//注入配置config接口
+		wx.config({
+			debug : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+			appId : obj.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+			timestamp : obj.timestamp, // 必填，生成签名的时间戳
+			nonceStr : obj.nonceStr, // 必填，生成签名的随机串
+			signature : obj.signature,// 必填，签名，见附录1
+			jsApiList : [ 'checkJsApi', 'getLocation' ]
+		// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+		});
+
+		wx.ready(function() {
+			wx.getLocation({
+				success : function(res) {
+					var longitude = res.longitude; // 纬度，浮点数，范围为90 ~ -90
+					var latitude = res.latitude; // 经度，浮点数，范围为180 ~ -180。
+					var speed = res.speed; // 速度，以米/每秒计
+					var accuracy = res.accuracy; // 位置精度
+					alert(longitude + " " + latitude)
+					/* $.get("../../storeInfo/storlist",{longitude:longitude,latitude:latitude},function(data){
+						
+						$(".product").html(storelist);
+					},"json"); */
+				},
+				fail : function(res) {
+					alert('请确认您的手机已经允许微信使用GPS！！！')
+				}
+			});
+		});
+	}
+	
+	window.onload = localtion();
 </script>

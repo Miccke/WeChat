@@ -2,7 +2,14 @@ package com.cn.car.util;
 
 
 
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -12,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import com.cn.car.entity.RefreshToken;
 import com.cn.car.entity.WeChatUserInfo;
+import com.google.gson.Gson;
 @Component
 public class RefreshTokenUtil {
 	/**
@@ -94,4 +102,28 @@ public class RefreshTokenUtil {
         }
         return weChatUserInfo;
     }
+    /**
+     * jsapi_ticket
+     * @param request
+     * @param out
+     */
+    @SuppressWarnings("unchecked")
+	public String getSignature(String access_token){  
+		    String xml = HttpXmlClient.get("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+access_token+"&type=jsapi"); 
+		    JSONObject jsonMap  = JSONObject.fromObject(xml);
+		    Iterator<String> it = jsonMap.keys();  
+
+			Map<String, String> map = new HashMap<String, String>();
+
+		    jsonMap  = JSONObject.fromObject(xml);
+			map = new HashMap<String, String>();
+		    it = jsonMap.keys();  
+		    while(it.hasNext()) {  
+		        String key = (String) it.next();  
+		        String u = jsonMap.get(key).toString();
+		        map.put(key, u);  
+		    }
+		    String jsapi_ticket = map.get("ticket");
+			return jsapi_ticket;	    
+	    }    
 }
