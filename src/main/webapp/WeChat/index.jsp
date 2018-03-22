@@ -74,18 +74,12 @@
 				var userName = prompt("请输入您的学号进行绑定：", "");
 				$.post("../user/checkUser",{openId:'<%=openId%>',userName:userName},function(data){
 					if(data){
-						alert(data);				
+						alert("绑定成功");				
 					}else{
-						alert(data+"123456");
+						alert("绑定失败请联系管理员");
 					}
 				},"json")
-				
-				if (studentID == "lewanzi")
-					alert("你的输入正确！");
-				else
-					alert("你的输入不正确！");
 			}
-			
 		},"json")
 		
 		
