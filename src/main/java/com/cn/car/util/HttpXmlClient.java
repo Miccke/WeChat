@@ -103,7 +103,7 @@ public class HttpXmlClient {
 
 	public static void main(String[] args) {
 		
-		//��ȡaccess_token
+		//获取access_token
 		Map<String, String> params = new HashMap<String, String>();
 	
 		String xml = HttpXmlClient.get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx32c7f58bed37cf1f&secret=52e4def5eb3b8d36defe10af7dad4398");
@@ -120,7 +120,7 @@ public class HttpXmlClient {
 	    String access_token = map.get("access_token");
 	    System.out.println("access_token=" + access_token);
 	    
-	    //��ȡticket
+	    //获取ticket
 	    params.put("access_token",access_token);
 	    params.put("type","jsapi");
 	  //  xml = HttpXmlClient.post("https://api.weixin.qq.com/cgi-bin/ticket/getticket",params); 
@@ -136,7 +136,7 @@ public class HttpXmlClient {
 	    String jsapi_ticket = map.get("ticket");
 	    System.out.println("jsapi_ticket=" + jsapi_ticket);
 	    
-	    //��ȡǩ��signature
+	    //获取签名signature
 	    String noncestr = UUID.randomUUID().toString();
 	    String timestamp = Long.toString(System.currentTimeMillis() / 1000);
 	    String url="http://mp.weixin.qq.com";
@@ -144,30 +144,30 @@ public class HttpXmlClient {
                 "&noncestr=" + noncestr +
                 "&timestamp=" + timestamp +
                 "&url=" + url;
-	    //sha1����
+	    //sha1加密
 	    String signature = SHA1(str);
 	    System.out.println("noncestr=" + noncestr);
 	    System.out.println("timestamp=" + timestamp);
 	    System.out.println("signature=" + signature);
-	    //���ջ�õ���΢��js�ӿ���֤��Ҫ���������noncestr��timestamp��signature
+	    //最终获得调用微信js接口验证需要的三个参数noncestr、timestamp、signature
 	}
 	
 	   /** 
-     * @author���޹�� 
-     * @date�� 2015��12��17�� ����9:24:43 
-     * @description�� SHA��SHA1����
-     * @parameter��   str��������ַ�
-     * @return��  ���ܴ�
+     * @author：罗国辉 
+     * @date： 2015年12月17日 上午9:24:43 
+     * @description： SHA、SHA1加密
+     * @parameter：   str：待加密字符串
+     * @return：  加密串
     **/
     public static String SHA1(String str) {
         try {
             MessageDigest digest = java.security.MessageDigest
-                    .getInstance("SHA-1"); //�����SHA����ֻ��Ҫ��"SHA-1"�ĳ�"SHA"����
+                    .getInstance("SHA-1"); //如果是SHA加密只需要将"SHA-1"改成"SHA"即可
             digest.update(str.getBytes());
             byte messageDigest[] = digest.digest();
             // Create Hex String
             StringBuffer hexStr = new StringBuffer();
-            // �ֽ�����ת��Ϊ ʮ����� ��
+            // 字节数组转换为 十六进制 数
             for (int i = 0; i < messageDigest.length; i++) {
                 String shaHex = Integer.toHexString(messageDigest[i] & 0xFF);
                 if (shaHex.length() < 2) {

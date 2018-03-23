@@ -125,6 +125,7 @@
 					},"json"); */
 				},
 				fail : function(res) {
+					alert(res);
 					alert('请确认您的手机已经允许微信使用GPS！！！')
 				}
 			});
