@@ -23,6 +23,10 @@ public class CourseServiceImpl implements CourseService {
 	public int listCount(Course user) {
 		return courseDao.listCount(user);
 	}
+	@Override
+	public Course getCourse(Course user) {
+		return courseDao.getCourse(user);
+	}
 
 
 }

@@ -70,7 +70,7 @@
             var row = grid.getSelected();
             if (row) {
                 mini.open({
-                    url: bootPATH + "../demo/CommonLibs/EmployeeWindow.html",
+                    url: bootPATH + "EmployeeWindow.html",
                     title: "编辑员工", width: 600, height: 400,
                     onload: function () {
                         var iframe = this.getIFrameEl();

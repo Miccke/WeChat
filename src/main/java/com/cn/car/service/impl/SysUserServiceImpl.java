@@ -44,4 +44,13 @@ public class SysUserServiceImpl implements SysUserService {
     public int blindUser(SysUser user) {
 		return sysUserDao.blindUser(user);
 	}
+	/**
+     * 登录
+     * @param user
+     * @return
+     */
+	@Override
+	public int loginUser(SysUser user) {
+		return sysUserDao.loginUser(user);
+	}
 }

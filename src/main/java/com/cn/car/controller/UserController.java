@@ -1,5 +1,6 @@
 package com.cn.car.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -8,16 +9,22 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cn.car.entity.SysUser;
 import com.cn.car.service.SysUserService;
+import com.cn.car.util.JsonToMap;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 @Controller
 @RequestMapping("/user")
@@ -26,16 +33,42 @@ public class UserController {
 	@Resource
     private SysUserService sysUserService ;
 
-    @RequestMapping("/loginAdmin")
-    public String login(HttpServletRequest request,HttpServletResponse response, SysUser user, Model model){
-        try {
-            return "../../back/manager/main" ;
-        }catch (Exception e){
-            //这里将异常打印关闭是因为如果登录失败的话会自动抛异常
-//            e.printStackTrace();
-            model.addAttribute("error","用户名或密码错误") ;
-            return "../../login" ;
-        }
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/login")
+    public void login(HttpServletRequest request,HttpServletResponse response, SysUser user, PrintWriter out, HttpSession session){
+        	try {
+        		request.setCharacterEncoding("utf-8");
+        		response.setCharacterEncoding("utf-8");
+        		JSONObject result = new JSONObject();
+				String data = request.getParameter("data").substring(1,request.getParameter("data").length()-1);
+				Gson gson = new Gson();
+				
+				Map<String, Object> map = new HashMap<String,Object>();
+				map = gson.fromJson(data, map.getClass());
+				String userName = (String) map.get("username");
+				String password = (String) map.get("password");
+				user.setUserName(userName);
+				user.setPassword(password);
+				
+				int count = sysUserService.loginUser(user);
+				if(count == 1 ){
+					session.setAttribute("userName", userName);
+					session.setAttribute("password", password);
+					result.put("success", true);
+					result.put("page", "index.jsp");
+					out.print(result);
+					out.flush();
+					out.close();
+				}else{
+					result.put("error",false);
+					result.put("page", "login.jsp");
+					out.print(result);
+					out.flush();
+					out.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
     }
 
     @RequestMapping("/admin")

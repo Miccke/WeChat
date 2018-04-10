@@ -33,7 +33,13 @@
 			where course = #{course,jdbcType=VARCHAR}
 		</if>
 	</select> 
-  
+  	<select id="getCourse"  resultType="com.cn.car.entity.Course" parameterType="com.cn.car.entity.Course">
+  	    select  * from t_course where  #{endTime,jdbcType=TIMESTAMP} > startTime and endTime > #{endTime,jdbcType=TIMESTAMP} 
+  	</select>
+	
+	
+	
+	
 	
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

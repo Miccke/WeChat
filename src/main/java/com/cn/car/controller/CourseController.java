@@ -1,6 +1,7 @@
 package com.cn.car.controller;
 
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cn.car.entity.Course;
 import com.cn.car.service.CourseService;
@@ -26,7 +30,7 @@ public class CourseController {
     private CourseService courseService ;
 
     @RequestMapping("/list")
-    public void SearchEmployees(HttpServletRequest request, HttpServletResponse response,Course course) throws Exception{ 		
+    public void getCourseList(HttpServletRequest request, HttpServletResponse response,Course course) throws Exception{ 		
         //查询条件
         String key = request.getParameter("key");
         if(StringUtils.isNotEmpty(key)){
@@ -69,5 +73,18 @@ public class CourseController {
 		pw.close();
 
     }
+    @RequestMapping("/getCourse")
+    public ModelAndView getCourse(HttpServletRequest request,HttpServletResponse response) {
 
+    	ModelAndView map = new ModelAndView();
+    	Date date = new Date();
+		response.setContentType("text/html;charset=UTF-8");
+		Course course = new Course();
+		course.setEndTime(date);
+		course = courseService.getCourse(course);
+		map.addObject("course", course);
+		map.setViewName("index");
+        //视图名
+        return map;
+    }
 }

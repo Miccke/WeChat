@@ -117,7 +117,7 @@ public class WeChatUserInfoController {
 	
 
 	 @RequestMapping("/signature")    
-	    public void getIndex(HttpServletRequest request,PrintWriter out,HttpSession session){  
+	 public void getIndex(HttpServletRequest request,PrintWriter out,HttpSession session){  
 
 	       // ModelAndView mav = new ModelAndView("index");
 	        JSONObject object = new  JSONObject();
@@ -158,7 +158,8 @@ public class WeChatUserInfoController {
 		    String timestamp = Long.toString(System.currentTimeMillis() / 1000);
 		    //获取请求url
 		    String path = request.getContextPath();
-	        String url = request.getScheme() + "://" + request.getServerName() +  path + "/WeChat/index.jsp";  
+	        String url = request.getScheme() + "://" + request.getServerName() +  path + "/course/getCourse";  
+//	        String url = request.getScheme() + "://" + request.getServerName() +  path + "/WeChat/index.jsp";  
 		    String str = "jsapi_ticket=" + jsapi_ticket +
 	                "&noncestr=" + noncestr +
 	                "&timestamp=" + timestamp +
@@ -182,4 +183,5 @@ public class WeChatUserInfoController {
 			out.flush();
 			out.close();
 	    }    
+
 }

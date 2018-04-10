@@ -46,11 +46,7 @@ body {
 				</tr>
 			</table>
 		</div>
-
 	</div>
-
-
-
 
 
 	<script type="text/javascript">
@@ -69,22 +65,28 @@ body {
 
 			var json = mini.encode([ data ]);
 			$.ajax({
-				url : "${pageContext.request.contextPath }/user/loginAdmin",
+				url : "${pageContext.request.contextPath }/user/login",
 				type : 'post',
 				data : {
 					data : json
 				},
 				cache : false,
-				success : function(text) {
-					loginWindow.hide();
-					mini.loading("登录成功，马上转到系统...", "登录成功");
-					setTimeout(function() {
-						window.location = '${pageContext.request.contextPath }/back/manager/main.jsp';
-					}, 1500);
+				success : function(result) {
+					if(JSON.parse(result).success){
+						loginWindow.hide();
+						mini.loading("登录成功，马上转到系统...", "登录成功");
+						setTimeout(function() {
+							window.location = '${pageContext.request.contextPath}/back/manager/'+JSON.parse(result).page;
+						}, 1500);
+					}else{
+						form.clear();
+						mini.alert("用户名或密码不正确","登录失败");
+					}
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
+					debugger;
 					form.clear();
-					mini.loading("登录失败", "登录失败");
+					mini.alert("登录失败", "登录失败");
 				}
 			});
 		}

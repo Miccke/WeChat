@@ -85,13 +85,11 @@
                     iframe.contentWindow.SetData(data);
                 },
                 ondestroy: function (action) {
-
                     grid.reload();
                 }
             });
         }
         function edit() {
-         
             var row = grid.getSelected();
             if (row) {
                 mini.open({
@@ -105,7 +103,6 @@
                     },
                     ondestroy: function (action) {
                         grid.reload();
-                        
                     }
                 });
                 

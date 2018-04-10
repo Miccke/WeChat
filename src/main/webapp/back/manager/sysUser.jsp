@@ -58,7 +58,7 @@
             mini.open({
                 targetWindow: window,
 
-                url: bootPATH + "../demo/CommonLibs/EmployeeWindow.html",
+                url: "EmployeeWindow.html",
                 title: "新增员工", width: 600, height: 400,
                 onload: function () {
                     var iframe = this.getIFrameEl();
@@ -74,15 +74,15 @@
         function edit() {
          
             var row = grid.getSelected();
+            debugger;
             if (row) {
                 mini.open({
-                    url: bootPATH + "../demo/CommonLibs/EmployeeWindow.html",
+                	url: "EmployeeWindow.html",
                     title: "编辑员工", width: 600, height: 400,
                     onload: function () {
                         var iframe = this.getIFrameEl();
                         var data = { action: "edit", id: row.id };
                         iframe.contentWindow.SetData(data);
-
                     },
                     ondestroy: function (action) {
                         //var iframe = this.getIFrameEl();

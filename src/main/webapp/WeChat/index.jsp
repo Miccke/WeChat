@@ -3,9 +3,10 @@
     pageEncoding="UTF-8"%>
 <%
 	 // 获取由OAuthServlet中传入的参数
- //   WeChatUserInfo user = (WeChatUserInfo)request.getAttribute("weChatUserInfo"); 
-  //  String openId = user.getOpenId();
-    String openId = "Miccke123456";
+   	WeChatUserInfo user = (WeChatUserInfo)session.getAttribute("weChatUserInfo"); 
+   	String openId = user.getOpenId();
+  //  String openId = "Miccke123456";
+    
 %>
 <!doctype html>
 <html>
@@ -50,7 +51,7 @@
 			<li><div class="clock">2018-03-15 16:41:36&nbsp;&nbsp;&nbsp;&nbsp;信息楼&nbsp;&nbsp;&nbsp;&nbsp;张晓毅&nbsp;&nbsp;&nbsp;&nbsp;大学物理</div></li>
 		</ul>
 	</div>
-	<p style="font-size: 12px;color: #FF7F00"><span style="margin-left: 40px"><label>课程：</label><span>大学物理</span></span>   <span style="float: right; margin-right: 40px"><label>教师：</label><span>张晓毅</span></span></p>
+	<p style="font-size: 12px;color: #FF7F00"><span style="margin-left: 40px"><label>课程：</label><span>${course.course}</span></span>   <span style="float: right; margin-right: 40px"><label>教师：</label><span>${course.teacher}</span></span></p>
 	<div align="center" style="margin-top: 80px">
 		
 		<p></p>
@@ -65,12 +66,12 @@
 	</div>
 </body>
 </html>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8qCA9IG7tah98yjZMAsUQQgF5x9aFIBM"></script>
 <script type="text/javascript">
 	function binding() {
-		
 		$.post("../user/checkUser",{openId:'<%=openId%>'},function(data){
 			if(data){
-				alert(1);
+				var local = localtion();
 			}else{
 				var userName = prompt("请输入您的学号进行绑定：", "");
 				$.post("../user/blindUser",{openId:'<%=openId%>',userName:userName},function(data){
@@ -83,9 +84,11 @@
 			}
 		},"json")
 	}
-</script>
-<script type="text/javascript">
+	
+	
+	
 	function localtion() {
+		var longLat = new Object();
 		function temp() {
 			var value = '';
 			$.ajax({
@@ -118,19 +121,34 @@
 					var latitude = res.latitude; // 经度，浮点数，范围为180 ~ -180。
 					var speed = res.speed; // 速度，以米/每秒计
 					var accuracy = res.accuracy; // 位置精度
-					alert(longitude + " " + latitude)
-					/* $.get("../../storeInfo/storlist",{longitude:longitude,latitude:latitude},function(data){
-						
-						$(".product").html(storelist);
-					},"json"); */
+					longLat.longitude = longitude;
+					longLat.latitude = latitude;
+					
+					// 创建地理编码实例      
+					var address = "";
+					var myGeo = new BMap.Geocoder();      
+					// 根据坐标得到地址描述    
+					myGeo.getLocation(new BMap.Point(longitude, latitude), function(result){      
+						debugger;
+					    if (result){      
+					    	alert(result.address);   
+					    	address = result.address;
+					    	var id = ${course.id};
+					    	$.get("../cr/address",{longitude:longitude,latitude:latitude,address:address,id:id},function(data){
+								if(data == 1){
+					    			alert("打卡成功");
+								}else{
+					    			alert("打卡失败");
+								}
+							},"json");
+					    }      
+					});
 				},
 				fail : function(res) {
-					alert(res);
 					alert('请确认您的手机已经允许微信使用GPS！！！')
 				}
 			});
 		});
 	}
-	
-	window.onload = localtion();
 </script>
+

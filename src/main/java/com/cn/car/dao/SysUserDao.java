@@ -19,4 +19,10 @@ public interface SysUserDao {
      * @return
      */
     public int blindUser(SysUser user);
+    /**
+     * 登录
+     * @param user
+     * @return
+     */
+    public int loginUser(SysUser user);
 }
