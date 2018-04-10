@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.car.dao.ClockRecordDao" >
+  <resultMap id="BaseResultMap" type="com.cn.car.entity.ClockRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="openId" property="openId" jdbcType="VARCHAR" />
+    <result column="co_id" property="co_id" jdbcType="INTEGER" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+ <sql id="Base_Column_List">
+    id, openId, co_id, longitude, latitude, address, date
+  </sql>
+  
+  
+  
+  
+  <insert id="insert" parameterType="com.cn.car.entity.ClockRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into t_clock_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="openId != null">
+        openId,
+      </if>
+      <if test="co_id != null">
+        co_id,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="co_id != null">
+        #{co_id,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="getCr" parameterType="com.cn.car.entity.ClockRecord" resultType="com.cn.car.entity.ClockRecord">
+    select 
+    	*
+    from t_clock_record
+    where 
+    <if test="openId != null">
+       openId = #{openId,jdbcType=VARCHAR}
+    </if>
+    <if test="co_id != null">
+       and co_id = #{co_id,jdbcType=INTEGER}
+    </if>
+  </select>
+  
+   <update id="updateCr" parameterType="com.cn.car.entity.ClockRecord">
+    update t_clock_record
+    <set>
+      <if test="openId != null">
+        openId = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="co_id != null">
+        co_id = #{co_id,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_clock_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_clock_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+<!--   <insert id="insert" parameterType="com.cn.car.entity.ClockRecord">
+    insert into t_clock_record (id, openId, co_id, 
+      longitude, latitude, address, 
+      date)
+    values (#{id,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR}, #{co_id,jdbcType=INTEGER}, 
+      #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{date,jdbcType=TIMESTAMP})
+  </insert> -->
+  
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.car.entity.ClockRecord">
+    update t_clock_record
+    <set>
+      <if test="openId != null">
+        openId = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="co_id != null">
+        co_id = #{co_id,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.car.entity.ClockRecord">
+    update t_clock_record
+    set openId = #{openId,jdbcType=VARCHAR},
+      co_id = #{co_id,jdbcType=INTEGER},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
