@@ -8,4 +8,5 @@ public interface CourseDao {
 	public List<Course> list(Course user);
 	public int listCount(Course user);
 	public Course getCourse(Course user);
+	public Course getById(Long id);
 }

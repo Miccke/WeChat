@@ -131,10 +131,9 @@
 					myGeo.getLocation(new BMap.Point(longitude, latitude), function(result){      
 						debugger;
 					    if (result){      
-					    	alert(result.address);   
 					    	address = result.address;
 					    	var id = ${course.id};
-					    	$.get("../cr/address",{longitude:longitude,latitude:latitude,address:address,id:id},function(data){
+					    	$.post("../cr/address",{longitude:longitude,latitude:latitude,address:address,id:id},function(data){
 								if(data == 1){
 					    			alert("打卡成功");
 								}else{

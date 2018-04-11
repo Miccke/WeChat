@@ -27,6 +27,11 @@ public class CourseServiceImpl implements CourseService {
 	public Course getCourse(Course user) {
 		return courseDao.getCourse(user);
 	}
+	@Override
+	public Course getById(Long id) {
+		// TODO Auto-generated method stub
+		return courseDao.getById(id);
+	}
 
 
 }

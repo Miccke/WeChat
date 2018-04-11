@@ -12,8 +12,11 @@ public class Course extends Page{
     private Date endTime;
     //教师
     private String teacher;
+    
+    private Date day;
+   
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -52,4 +55,11 @@ public class Course extends Page{
     public void setTeacher(String teacher) {
         this.teacher = teacher == null ? null : teacher.trim();
     }
+    public Date getDay() {
+		return day;
+	}
+
+	public void setDay(Date day) {
+		this.day = day;
+	}
 }
