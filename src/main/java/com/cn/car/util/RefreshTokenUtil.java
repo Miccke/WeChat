@@ -2,14 +2,10 @@ package com.cn.car.util;
 
 
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -19,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import com.cn.car.entity.RefreshToken;
 import com.cn.car.entity.WeChatUserInfo;
-import com.google.gson.Gson;
 @Component
 public class RefreshTokenUtil {
 	/**

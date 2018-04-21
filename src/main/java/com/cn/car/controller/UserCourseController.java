@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cn.car.entity.Course;
 import com.cn.car.entity.UserCourse;
-import com.cn.car.entity.WeChatUserInfo;
 import com.cn.car.service.CourseService;
 import com.cn.car.service.SysUserService;
 import com.cn.car.service.UserCourseService;

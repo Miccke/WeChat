@@ -1,15 +1,14 @@
 package com.cn.car.service.impl;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.cn.car.dao.SysUserDao;
 import com.cn.car.entity.SysUser;
 import com.cn.car.service.SysUserService;
-
-import javax.annotation.Resource;
-
-import java.util.List;
-import java.util.Set;
 
 @Service("sysUserService")
 public class SysUserServiceImpl implements SysUserService {

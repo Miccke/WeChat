@@ -1,6 +1,5 @@
 package com.cn.car.controller;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -15,16 +14,11 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.cn.car.entity.SysUser;
 import com.cn.car.service.SysUserService;
-import com.cn.car.util.JsonToMap;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 @Controller
 @RequestMapping("/user")

@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cn.car.util.HttpXmlClient;
-import com.google.gson.Gson;
 
 
 @Controller  
